@@ -1,4 +1,4 @@
-package com.firstproject;
+package com.nativeproject;
 
 import android.app.Application;
 import android.content.Context;
