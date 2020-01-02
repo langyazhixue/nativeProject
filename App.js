@@ -20,9 +20,13 @@ import {
   Alert,
   Image,
   TextInput,
+  Platform, // 平台判断
+  Dimensions, // 获取屏幕高度和宽度
   ActivityIndicator,
 } from 'react-native';
 
+const {width, height} = Dimensions.get('window');
+import {WebView} from 'react-native-webview';
 import {
   Header,
   LearnMoreLinks,
@@ -30,12 +34,36 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-// var Dimensions = require('Dimensions');
+
+import List from './screen/List/index';
+
+function ComponentIOS() {
+  return (
+    <View>
+      <Text>IOS</Text>
+    </View>
+  );
+}
+
+function ComponentAndriod() {
+  return (
+    <View>
+      <Text>AndRiod</Text>
+    </View>
+  );
+}
+
+const ComponentViewTest = Platform.select({
+  ios: ComponentIOS,
+  android: ComponentAndriod,
+});
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       animating: false,
+      inputValue: '',
     };
   }
   render() {
@@ -44,9 +72,7 @@ export default class App extends Component {
         <StatusBar barStyle="dark-content" />
         {/* 刘海屏幕 */}
         <SafeAreaView style={styles.containerStyle}>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.containerStyle}>
+          {/* <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.buttonView}>
               <View>
                 <Text>11</Text>
@@ -97,7 +123,6 @@ export default class App extends Component {
               />
 
               <Image source={require('./images/log.jpg')} />
-              {/* 显示网络图片 */}
               <Image
                 style={{width: 50, height: 50}}
                 source={{
@@ -109,21 +134,44 @@ export default class App extends Component {
                 <TextInput
                   style={styles.textInput}
                   placeholder="请输入6为数字密码"
-                  value={'default'}
+                  value={this.state.inputValue}
                   placeholderTextColor={'red'}
                   keyboardType={'number-pad'}
                   clearButtonMode={'while-editing'}
                   onChangeText={text => {
-                    console.log(text);
+                    this.setState({
+                      inputValue: text,
+                    });
                   }}
+                  // secureTextEntry={true}
                   returnKeyType="done"
                   onSubmitEditing={event => {
-                    console.log(event);;
+                    console.log(event.nativeEvent);
                   }}
                 />
               </View>
+              <View style={{width, height: 30, backgroundColor: 'red'}} />
+              {Platform.OS === 'ios' ? (
+                <View>
+                  <Text>ios</Text>
+                </View>
+              ) : (
+                <View>
+                  <Text>Andriod</Text>
+                </View>
+              )}
+
+              <ComponentViewTest />
             </View>
-          </ScrollView>
+          </ScrollView> */}
+
+          {/* <WebView
+            source={{
+              uri: 'https://github.com/facebook/react-native',
+            }}
+            style={{marginTop: 20}}
+          /> */}
+          <List />
         </SafeAreaView>
       </>
     );
@@ -132,8 +180,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    backgroundColor: '#fff',
-    minHeight: 500,
+    backgroundColor: 'green',
     flex: 1,
   },
   buttonView: {
