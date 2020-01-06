@@ -1,16 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {layoutStyles} from '../../../styles/layout';
+import {SafeAreaView, View, Text, Button} from 'react-native';
 
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Button,
-} from 'react-native';
-
-export default class HomeScreen extends React.Component {
+export default class HomePage extends Component {
   hanlderClick = () => {
     console.log(this.props);
     // 自带navigation
@@ -21,14 +13,13 @@ export default class HomeScreen extends React.Component {
   };
   static navigationOptions = {
     title: '首页',
-    headerBackTitle: 'home',
   };
   componentDidMount() {
     console.log('home componentDidMount');
   }
   render() {
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#cfcfcf'}}>
+      <SafeAreaView style={layoutStyles.appContainer}>
         <View>
           <Text>首页</Text>
           <Button title="跳到详情页面" onPress={this.hanlderClick} />

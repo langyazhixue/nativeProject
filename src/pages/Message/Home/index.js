@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {layoutStyles} from '../../../styles/layout';
 import {
   SafeAreaView,
   StyleSheet,
@@ -21,17 +21,19 @@ export default class MessageScreen extends React.Component {
   };
   static navigationOptions = {
     title: 'message',
-    headerBackTitle: 'home',
   };
   componentDidMount() {
     console.log('home componentDidMount');
   }
   render() {
     return (
-      <View style={{flex: 1}}>
-        <Text>Message</Text>
-        {/* <Button title="跳到详情页面" onPress={this.hanlderClick} /> */}
-      </View>
+      <SafeAreaView style={layoutStyles.appContainer}>
+        <View style={{flex: 1}}>
+          <Text>Message</Text>
+          {/* <Button title="跳到详情页面" onPress={this.hanlderClick} /> */}
+        </View>
+      </SafeAreaView>
     );
   }
 }
+

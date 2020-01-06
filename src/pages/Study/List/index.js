@@ -13,7 +13,6 @@ import {
 
 const {width, height} = Dimensions.get('window');
 import jsonData from '../../city_list1.json';
-import {RaceSubscriber} from 'rxjs/internal/observable/race';
 export default class List extends Component {
   constructor(props) {
     super(props);
