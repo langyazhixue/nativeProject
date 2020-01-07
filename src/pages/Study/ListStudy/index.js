@@ -12,8 +12,8 @@ import {
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-import jsonData from '../../city_list1.json';
-export default class List extends Component {
+import jsonData from './menu.json';
+export default class ListStudyScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,10 +40,12 @@ export default class List extends Component {
     }, 2000);
   };
   _renderItem = ({item}) => {
+    const {navigation} = this.props;
     return (
       <TouchableOpacity
         onPress={() => {
-          Alert.alert(item.name);
+          // 界面跳转参数传递
+          navigation.navigate(item.stackScreen, item.params);
         }}>
         <Text style={styles.listItem}>{item.name}</Text>
       </TouchableOpacity>
@@ -106,7 +108,7 @@ export default class List extends Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text>头部</Text>
+        <Text>react-native 学习菜单</Text>
       </View>
     );
   };
@@ -121,7 +123,7 @@ export default class List extends Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text>尾部</Text>
+        <Text>react-native 学习尾部</Text>
       </View>
     );
   };

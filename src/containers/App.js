@@ -3,6 +3,7 @@ import HomeNavigator from '../pages/Home';
 import CompanyNavigator from '../pages/Company';
 import MyNavigator from '../pages/My';
 import MessageNavigator from '../pages/Message';
+import StudyNavigator from '../pages/Study';
 const RootTabNavigator = createBottomTabNavigator(
   {
     Home: {
@@ -30,13 +31,19 @@ const RootTabNavigator = createBottomTabNavigator(
         title: '我的',
       },
     },
+    StudyNavigator: {
+      screen: MyNavigator,
+      navigationOptions: {
+        title: '学习',
+      },
+    },
   },
   {
     initialRouteName: 'Home',
-    initialRouteKey: 'homeKey',
-    initialRouteParams: 'jxx',
-    disableKeyboardHandling: true, // 如果为true 则导航到新屏幕时键盘不不会⾃自动关闭
-    defaultNavigationOptions: {},
+    // initialRouteKey: 'homeKey',
+    // initialRouteParams: 'jxx',
+    // disableKeyboardHandling: true, // 如果为true 则导航到新屏幕时键盘不不会⾃自动关闭
+    // defaultNavigationOptions: {},
   },
 );
 

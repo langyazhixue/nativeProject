@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {layoutStyles} from '../../../styles/layout';
 import {
   SafeAreaView,
   StyleSheet,
@@ -35,9 +35,12 @@ export default class DetailScreen extends React.Component {
   };
   render() {
     return (
-      <View>
-        <Text>详情页</Text>
-      </View>
+      <SafeAreaView style={layoutStyles.appContainer}>
+        <View>
+          <Text>首页</Text>
+          <Button title="跳到详情页面" onPress={this.hanlderClick} />
+        </View>
+      </SafeAreaView>
     );
   }
 }

@@ -1,0 +1,10 @@
+[{
+  "label": "NavigationOptionsStudy",
+  "name": "导航react-navigation-stack 学习",
+  "stackScreen": "NavigationOptionsStudy",
+  "params":{
+    "title": "NavigationOptionsStudy",
+    "backTitle": "列表",
+    "mode": "save"
+  }
+}]
