@@ -3,7 +3,7 @@ import ListStudy from './ListStudy/index';
 import NavigationOptionsStudy from './NavigationOptionsStudy/index';
 import {defaultNavigatiionOptions} from '../../globalSetting';
 
-const MyNavigator = createStackNavigator(
+const StudyNavigator = createStackNavigator(
   {
     ListStudy: {
       screen: ListStudy,
@@ -54,4 +54,4 @@ const MyNavigator = createStackNavigator(
     // onTransitionEnd 页面切换结束时间时候的回调函数
   },
 );
-export default MyNavigator;
+export default StudyNavigator;
