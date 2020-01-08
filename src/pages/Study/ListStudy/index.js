@@ -12,8 +12,19 @@ import {
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-import jsonData from './menu.json';
+import jsonData from './../menu.json';
+
 export default class ListStudyScreen extends Component {
+  static navigationOptions = props => {
+    console.log(props);
+    const {navigation} = props;
+    const {
+      state: {params},
+    } = navigation;
+    return {
+      headerTitle: params.headerTitle,
+    };
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +48,7 @@ export default class ListStudyScreen extends Component {
       this.setState({
         isLoading: false,
       });
-    }, 2000);
+    }, 200);
   };
   _renderItem = ({item}) => {
     const {navigation} = this.props;
@@ -85,7 +96,7 @@ export default class ListStudyScreen extends Component {
                   dataList: jsonData,
                   isRefresh: false,
                 });
-              }, 2000);
+              }, 200);
             }}
           />
         }
@@ -93,7 +104,7 @@ export default class ListStudyScreen extends Component {
         // 监听滑动到底部的事件
         onEndReachedThreshold={0.1} // 滑动到底部多少的时候触发
         onEndReached={() => {
-          Alert.alert('onEndReached');
+          // Alert.alert('onEndReached');
         }}
       />
     );

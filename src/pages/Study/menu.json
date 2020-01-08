@@ -7,4 +7,11 @@
     "backTitle": "列表",
     "mode": "save"
   }
+},{
+   "label": "Input study",
+    "name": "Input 学习 ",
+    "stackScreen": "InputStudy",
+    "params":{
+      "title": "InputStudy",
+    }
 }]
