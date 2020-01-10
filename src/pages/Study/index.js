@@ -50,7 +50,7 @@ const StudyNavigator = createStackNavigator(
   },
   {
     // 默认的导航栏信息在这里配置,根据作用不同分为路由配置、视图样式配置两类
-    initialRouteName: 'Home', //设置默认的⻚页⾯面组件，必须是上⾯面已注册的⻚面组件。 路由配置
+    initialRouteName: 'Home', //设置默认的页面组件，必须是上⾯已注册的⻚面组件。 路由配置
     // initialRouteKey: 'homeKey',  // 初始路路由的参数  路由配置
     initialRouteParams: {
       headerTitle: '列表学习',
@@ -58,7 +58,7 @@ const StudyNavigator = createStackNavigator(
     // disableKeyboardHandling: true, // 如果为true 则导航到新屏幕时键盘不会自动关闭
     defaultNavigationOptions: {...defaultNavigatiionOptions}, // 屏幕导航的默认选项视图样式
     mode: 'modal', // 左右是card(相当于iOS中的push效果), 上下是modal(相当于iOS中的modal 效果) // 视图样式
-    headerMode: 'screen', //  导航栏的显示模式: screen: 有渐变透明效果, float: ⽆无透明效果, none: 隐藏导航 栏。
+    headerMode: 'screen', //  导航栏的显示模式: screen: 有渐变透明效果, float: 无透明效果, none: 隐藏导航 栏。
     // headerBackTitleVisible: false, // 提供合理的默认值以确定后退按钮标题是否可见，但如果要覆盖它，则可以使用true或` false 在此选项中。
     cardStyle: {
       // IOS 上页面切换会有白色渐变蒙层，想去掉可以这样设置，切换时候页面边框也可以在这里设置

@@ -13,14 +13,17 @@ const RootTabNavigator = createBottomTabNavigator(
   {
     Home: {
       screen: HomeNavigator, // 指定⼀一个 React 组件作为屏幕的主要显示内容，当这个组件被TabNavigator加载 时，它会被分配⼀一个navigation prop。
-      // path:可选，⽤来设置⽀持schema跳转时使用，具体使用会在下文的有关 Schema 章节中讲到;
-      navigationOptions: {
+      // path:可选，⽤来设置⽀持schema跳转时使用，
+      navigationOptions: { 
         // 可选， 用以配置全局的屏幕导航选项：
         title: '首页', // 可以⽤用作headerTitle和tabBarLabel的备选的通⽤用标题。
         tabBarVisible: true, // 显示或隐藏TabBar, 默认显示
         // tabBarIcon: //  设置TabBar的图标
         // tabBarOnPress: //Tab呗点击的回调函数，它的参数是包含变量的对象
         // ---- navigation: navigation prop
+        // ---- defaultHandler
+        // tabBarOnLongPress // 回调以处理长按事件；参数是一个包含以下内容的对象
+         // ---- navigation: navigation prop
         // ---- defaultHandler
         // tabBarButtonComponent:  React组件，它包装图标和标签实现onPress,默认情况下是TouchableWithoutFeedback的⼀一个封装，使其其表现与其它可点击组件相同，
         // tabBarButtonComponent: TouchableOpacity 将使⽤用 TouchableOpacity 来替代;
@@ -34,9 +37,10 @@ const RootTabNavigator = createBottomTabNavigator(
       screen: CompanyNavigator,
       navigationOptions: {
         title: '公司',
+        tabBarVisible:false, // 切到公司，下面的导航栏就没了
         // tabBarIcon: ({tintColor, focused}) => {
-        // tintColor 当前状态下Tab的颜色
-        // focused: Tab 是否被选中
+          // tintColor 当前状态下Tab的颜色
+          // focused: Tab 是否被选中
         // },
       },
     },
@@ -61,8 +65,10 @@ const RootTabNavigator = createBottomTabNavigator(
     },
   },
   {
-    // tarBarComponent: 指定 createBottomTabNavigator的TabBar组件, 如果不指定，在 ios 上默认使用 TabBarBottom，在Android平台上默认使⽤用TabBarTop。
-    // ------ // TabBarBottom 与 TabBarTop 都是 react-navigation 所⽀支持的组件，要⾃自定义TabBar可 以重写这两个组件也可以根据需要⾃自⼰己实现⼀一个;
+  initialRouteName: 'Home', // 第一次加载时初始选项卡路由的 routeName
+   order:['Home','Company','Message','MyNavigator','StudyNavigator'],  // 定义选项卡顺序的 routeNames 数组   
+   defaultNavigationOptions:{  // 用于屏幕的默认导航选项
+    }, 
     tabBarOptions: {
       activeTintColor: 'red', // 设置TabBar选中状态下的标签和图标颜色
       inactiveTintColor: 'green', // 设置TabBar
@@ -77,9 +83,9 @@ const RootTabNavigator = createBottomTabNavigator(
       allowFontScaling: true, // 设置 TabBar标签是否支持缩放，默认支持；
       // safeAreaInset 覆盖的 forceInsetprop，默认是{ bottom: 'always', top: 'never' }， 可选值：top| bottom|left|right('always|never')
     },
-    initialRouteName: 'Home', // 默认页面组件， createBottomTabNavigator显示的第⼀个页面;
+    resetOnBlur:false, // 切换离开屏幕时，重置所有嵌套导航器的状态， 默认值： false。
     // paths: 提供 routeName 到 path config 的映射，它覆盖routeConfigs 中设置的路径
-    backBehavior: true, // 后退按钮是否会导致标签切换到初始 tab?如果是，则切换到初始tab, 否则什么也不做，默认为切换到初始tab
+    backBehavior: 'initialRoute', // initialRoute返回初始选项卡，order返回上一个选项卡，history返回上次访问标签或none。
   },
 );
 
