@@ -11,7 +11,7 @@ import StudyNavigator from '../pages/Study';
 
 const RootTabNavigator = createBottomTabNavigator(
   {
-    Home: {
+    HomeTab: {
       screen: HomeNavigator, // 指定⼀一个 React 组件作为屏幕的主要显示内容，当这个组件被TabNavigator加载 时，它会被分配⼀一个navigation prop。
       // path:可选，⽤来设置⽀持schema跳转时使用，
       navigationOptions: { 
@@ -33,7 +33,7 @@ const RootTabNavigator = createBottomTabNavigator(
         // tabBarTestID: 用于在测试中找到该选项卡按钮的ID
       },
     },
-    Company: {
+    CompanyTab: {
       screen: CompanyNavigator,
       navigationOptions: {
         title: '公司',
@@ -44,20 +44,20 @@ const RootTabNavigator = createBottomTabNavigator(
         // },
       },
     },
-    Message: {
+    MessageTab: {
       screen: MessageNavigator,
       navigationOptions: {
         title: '消息',
       },
     },
 
-    MyNavigator: {
+    MyNavigatorTab: {
       screen: MyNavigator,
       navigationOptions: {
         title: '我的',
       },
     },
-    StudyNavigator: {
+    StudyNavigatorTab: {
       screen: StudyNavigator,
       navigationOptions: {
         title: '学习',
@@ -65,8 +65,8 @@ const RootTabNavigator = createBottomTabNavigator(
     },
   },
   {
-  initialRouteName: 'Home', // 第一次加载时初始选项卡路由的 routeName
-   order:['Home','Company','Message','MyNavigator','StudyNavigator'],  // 定义选项卡顺序的 routeNames 数组   
+  initialRouteName: 'HomeTab', // 第一次加载时初始选项卡路由的 routeName
+   order:['HomeTab','CompanyTab','MessageTab','MyNavigatorTab','StudyNavigatorTab'],  // 定义选项卡顺序的 routeNames 数组   
    defaultNavigationOptions:{  // 用于屏幕的默认导航选项
     }, 
     tabBarOptions: {

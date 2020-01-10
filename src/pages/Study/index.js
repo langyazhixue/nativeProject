@@ -1,6 +1,9 @@
 import {createStackNavigator} from 'react-navigation-stack';
 import ListStudy from './ListStudy/index';
 import NavigationOptionsStudy from './NavigationOptionsStudy/index';
+import NavigationOptionsStudyDetail1 from './NavigationOptionsStudyDetail1/index';
+import NavigationOptionsStudyDetail2 from './NavigationOptionsStudyDetail2/index';
+
 import InputStudy from './InputStudy/index';
 import {defaultNavigatiionOptions} from '../../globalSetting';
 const StudyNavigator = createStackNavigator(
@@ -11,7 +14,7 @@ const StudyNavigator = createStackNavigator(
       navigationOptions: {
         // 导航本身的导航选项，用于配置父导航器
         title: '列表学习',
-        headerBackTitle: '返回',
+        //headerBackTitle: '返回',
         // title: // //可以作为headerTitle的备选字段(当设置headerTitle时候会用该字段作为标题),
         // header: // ⾃自定义导航条，可以通过设置null来隐藏导航条;
         // headerTitle: 标题
@@ -34,6 +37,18 @@ const StudyNavigator = createStackNavigator(
       screen: NavigationOptionsStudy,
       navigationOptions: {
         headerTitle: '导航学习',
+      },
+    },
+    NavigationOptionsStudyDetail1:{
+      screen: NavigationOptionsStudyDetail1,
+      navigationOptions: {
+        headerTitle: 'NavigationOptionsStudyDetail1',
+      },
+    },
+    NavigationOptionsStudyDetail2:{
+      screen: NavigationOptionsStudyDetail2,
+      navigationOptions: {
+        headerTitle: 'NavigationOptionsStudyDetail2',
       },
     },
     InputStudy: {

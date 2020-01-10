@@ -10,9 +10,18 @@ import {
   Button,
 } from 'react-native';
 
-import {NavigationActions} from 'react-navigation';
+import {NavigationActions,StackActions} from 'react-navigation';
 
 export default class NavigationOptionsStudyScreen extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
+  componentWillMount() {
+    console.log(this.props.navigation)
+    this.routeState = this.props.navigation.state
+  }
+  
   // 1. 静态属性配置 导航页面的属性，
   // 2. setParams  动态修改参数
   static navigationOptions = props => {
@@ -58,7 +67,7 @@ export default class NavigationOptionsStudyScreen extends React.Component {
   // 7. addListener:订阅导航生命周期的更新
   // 8. isFocused: true标识屏幕获取了了焦点
   // 9. getParam: 获取具有回退的特定参数
-  // 10. dangerouslyGetParent:返回⽗父导航器器
+  // 10. dangerouslyGetParent:返回父导航器
   
 
   //  注意--------
@@ -91,33 +100,15 @@ export default class NavigationOptionsStudyScreen extends React.Component {
   _popToPop = () => {
     this.props.navigation.popToTop(); // 关闭当前栈
   };
+  _dangerouslyGetParent = () => {
+    const parent = this.props.navigation.dangerouslyGetParent()
+    console.log(parent)
+  }
   // 不可行
   _dismiss = () => {
     this.props.navigation.dismiss()
   }
-  // 所有NavigationActions返回可以使用navigation.dispatch()方法发送到路由器的对象，支持以下操作
-// 1 navigate - 导航到另一条路由
-// 2 back - 回到之前的状态
-// 3 setParams - 设置给定路由的参数
-// 4 init 用于在状态未定义时初始化第一个状态
-
-
-// ---- navigate {
-  // routeName
-  // params 可选
-  // action: 可选 Object 如果屏幕是导航器，则在子路由器中运行的子操作。 此文档中描述的任何一个操作都可以设置为子操作。
-// }
-  _myNavigationActions = ()  => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: 'Home',
-      params: {
-        headerTitle:'列表页面2'
-      },
-      action: NavigationActions.navigate({routeName: 'InputStudy'}),
-    });
-    // 可以导航到首页
-    this.props.navigation.dispatch(navigateAction);
-  };
+ 
   // 可行
   _replace = () => {
     console.log(this.props)
@@ -125,6 +116,80 @@ export default class NavigationOptionsStudyScreen extends React.Component {
       title:'InputStudy'
     })
   };
+
+   // 所有NavigationActions返回可以使用navigation.dispatch()方法发送到路由器的对象，支持以下操作
+  // 1 navigate - 导航到另一条路由
+  // 2 back - 回到之前的状态
+  // 3 setParams - 设置给定路由的参数
+  // 4 init 用于在状态未定义时初始化第一个状态
+
+  // ---- navigate {
+    // routeName
+    // params 可选
+    // action: 可选 Object 如果屏幕是导航器，则在子路由器中运行的子操作。 此文档中描述的任何一个操作都可以设置为子操作。
+  // }
+  _myNavigationActions_navigate = ()  => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: 'HomeTab',
+      params: {
+        headerTitle:'列表页面2'
+      },
+      action: NavigationActions.navigate({
+        routeName: 'Detail',
+        params:{
+          myTitle:'Home详情页面',
+        }
+      }),
+    });
+    // 可以导航到首页
+    this.props.navigation.dispatch(navigateAction);
+  };
+
+  // back
+  // 返回上一页面并关闭当前页面。 back 动作创建者采用一个可选参数
+  // key:  string or null -
+  _myNavigationActions_back = () => {
+    const backAction = NavigationActions.back();
+    this.props.navigation.dispatch(backAction);
+  }
+
+  // setParams
+  // 当分发SetParams时，路由将产生一个新的状态，该状态改变了特定路由的参数，如由 Key 标识
+  // params:  - object - 必须 - 新的参数将被合并到现有的路由参数中
+  // key - string - 必须 - 应该得到新参数的路由 Key
+  // 不成功
+  _myNavigationActions_setParams = () => {
+    console.log(this.routeState)
+    // 设置首页的params
+    const setParamsAction = NavigationActions.setParams({
+      params: { title: 'Hello' },
+      key: 'id-1578626746219-4'
+      // key: this.routeState.key
+    });
+    this.props.navigation.dispatch(setParamsAction);
+  }
+  // ---------------StackActions -------------------
+
+  // StackActions 是一个包含用于生成特定的基于 stack-based navigators的操作方法的的对象
+  // 支持以下操作
+  // * Reset 用新状态替换当前状态
+  // * Replace  用给定的 key 替换另一条路由
+  // * Push 在堆栈顶部添加一条路由，并向前导航至该路由
+  // * Pop 导航回到之前的路由
+  // * popToPop 导航到堆栈的顶部路由，销毁所有其他路线
+
+  // 
+  _stackActions_reset = () => {
+    const resetAction = StackActions.reset({
+      index: 1,
+      actions: [NavigationActions.navigate({ routeName: 'Home', 
+      params:{
+        myTitle:'Home详情页面',
+      } }),NavigationActions.navigate({ routeName: 'NavigationOptionsStudyDetail1' })],
+    });
+    this.props.navigation.dispatch(resetAction);
+  }
+  
   render() {
     return (
       <SafeAreaView style={layoutStyles.appContainer}>
@@ -144,6 +209,12 @@ export default class NavigationOptionsStudyScreen extends React.Component {
           <View>
             <Button title="回到占顶" onPress={this._popToPop} />
           </View>
+
+          <View>
+            <Button title="返回父导航器" onPress={this._dangerouslyGetParent} />
+          </View>
+
+
           <View>
             <Button title="关闭当前栈" onPress={this._dismiss} />
           </View>
@@ -151,9 +222,26 @@ export default class NavigationOptionsStudyScreen extends React.Component {
             <Button title="⽤新路由替换当前路由" onPress={this._replace} />
           </View>
           <View>
-            <Button title="NavigationActions_navigate" onPress={this._myNavigationActions} />
+            <Button title="NavigationActions_navigate" onPress={this. _myNavigationActions_navigate} />
           </View>
 
+          <View>
+            <Button title="NavigationActions_back" onPress={this._myNavigationActions_back} />
+          </View>
+
+          <View>
+            <Button title="NavigationActions_setParams" onPress={this._myNavigationActions_setParams} />
+          </View>
+
+          <View>
+            <Text>
+            ---------------StackActions -------------------
+            </Text>
+          </View>
+
+          <View>
+            <Button title="StackActions_reset" onPress={this._stackActions_reset} />
+          </View>
         </View>
       </SafeAreaView>
     );

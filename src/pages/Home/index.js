@@ -1,14 +1,18 @@
 import {createStackNavigator} from 'react-navigation-stack';
-import Home from './Home/index';
+import HomeScreen from './Home/index';
+import DetailScreen from './Detail/index';
 import {defaultNavigationOptions} from '../../globalSetting';
 const HomeNavigator = createStackNavigator(
   {
     Home: {
-      screen: Home,
-      navigationOptions: {
-        title: '首页',
-      },
+      screen: HomeScreen,
+      // navigationOptions: {
+      //   headerTitle: 'Home首页',
+      // },
     },
+    Detail:{
+      screen:DetailScreen
+    }
   },
   {
     // 默认的导航栏信息在这里配置
