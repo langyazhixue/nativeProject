@@ -23,7 +23,7 @@ export default class ListStudyScreen extends Component {
     } = navigation;
     return {
       headerTitle: params.headerTitle,
-      headerBackTitle:'返回列表'
+      headerBackTitle: '返回列表',
     };
   };
   constructor(props) {

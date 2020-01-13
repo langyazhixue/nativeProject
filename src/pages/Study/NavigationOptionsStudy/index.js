@@ -17,9 +17,59 @@ export default class NavigationOptionsStudyScreen extends React.Component {
     super(props);
     this.state = {};
   }
-  componentWillMount() {
+  componentDidMount() {
     console.log(this.props.navigation);
     this.routeState = this.props.navigation.state;
+    // 添加监听
+    // Navigation 生命周期
+    // 假设一个 Stack Navigator 有两个 页面 A 和 B，在导航到 A 之后，A  页面的 componentDidMount ⽣生命周 期⽅方法将会被调⽤用. 当导航到 B ⻚页⾯面时,
+    // B ⻚页⾯面的 componentDidMount ⽅方法也会被调⽤用, 但是在堆栈中, A ⻚页⾯面仍然是被加载的,
+    // 并且它的 componentWillUnmount ⽣生命周期⽅方法不不会被调⽤用.`
+
+    // willFocus -页面将获取焦点
+    // didFocus - 页面已获取到焦点（如果有过渡动画，等过渡动画执行完成后响应）
+    // willBlur - 页面将失去焦点
+    // didFocus - 页面已获取到焦点（如果有过渡动画，等过渡动画执行完成后响应）
+
+    //监听界面已经出现
+    this.viewDidAppear = this.props.navigation.addListener('didFocus', obj => {
+      // 页面回退的时候可以执行里面的函数
+      console.log(obj); // 可以获取到以下信息
+      // context
+      // state
+      // lastState
+      // type
+    });
+
+    this.viewWillAppear = this.props.navigation.addListener(
+      'willFocus',
+      obj => {
+        console.log('willFocus', obj);
+      },
+    );
+    //监听界面将要失去焦点
+    this.viewWillDisappear = this.props.navigation.addListener(
+      'willBlur',
+      obj => {
+        console.log('willBlur', obj);
+      },
+    );
+
+    //监听界面已经失去焦点
+    this.viewDidDisappear = this.props.navigation.addListener(
+      'didBlur',
+      obj => {
+        console.log('didBlur', obj);
+      },
+    );
+  }
+
+  componentWillUnmount() {
+    // 移除监听
+    this.viewWillAppear.remove();
+    this.viewDidAppear.remove();
+    this.viewWillDisappear.remove();
+    this.viewDidDisappear.remove();
   }
 
   // 1. 静态属性配置 导航页面的属性，
@@ -50,12 +100,12 @@ export default class NavigationOptionsStudyScreen extends React.Component {
   };
 
   // 页面跳转,在学习导航器之前，我们需要了解两个和导航有关的概念
-  // ----- 1. Screen navigation prop(屏幕导航属性):通过navigation可以完成屏幕之间的调度操作，例如打 开另一个屏幕
-  // ------ 2. Screen navigation Options(屏幕导航选项):通过navigationOptions可以定制导航器器显示屏幕的 ⽅方式(例例如:头部标题，选项卡标签等)
+  // ----- 1. Screen navigation prop(屏幕导航属性): 通过navigation可以完成屏幕之间的调度操作，例如打 开另一个屏幕
+  // ------ 2. Screen navigation Options(屏幕导航选项):通过navigationOptions可以定制导航器显示屏幕的 方式(例如:头部标题，选项卡标签等)
 
   // ----1. Screen Navigation Prop 屏幕导航属性 navigation
   // ---- 当导航器中的屏幕被打开时候，它会接收到一个navigation prop ，它是整个导航环节的关键属性
-  // --- 重要的是要强调navigation prop 不传递给所有组件; 只有screen组件会自动收到此 prop！ React Navigation在这里没有做神奇的操作。
+  // --- 重要的是要强调navigation prop 不传递给所有组件; 只有screen组件会自动收到此 prop!React Navigation在这里没有做神奇的操作。
 
   // 1.  获取 { navigation } = this.props
   // 2. navigation.navigate('Page3',{ name: 'Devio' });
@@ -73,17 +123,20 @@ export default class NavigationOptionsStudyScreen extends React.Component {
   // 因为 navigation prop 不传递给所有组件;只有 screen 组件会自动收到此 prop!所以在使用navigate 时要进行判断，如果没有navigate可以使⽤navigation去dispatch⼀个新的action
 
   // StackNavigator 的 navigation 的额外功能
-  // ------当且仅当当前navigator 是 StackNavigator 时候， this.props.navigation 上有一些附加功能。
+  // ------当且仅当前navigator 是 StackNavigator 时候， this.props.navigation 上有一些附加功能。
   // ------这些函数是navigate和goBack的替代⽅方法
 
   // 1. this.props.navigation
-  // 1.1Push :导航到堆栈中的⼀一个新路路由
+  // 1.1 push :导航到堆栈中的一个新路路由
   // 2.2 pop:返回栈中的上⼀个⻚面
   // 3.3 popToTop:跳转到堆栈中最顶层的⻚页⾯面
   // 4.4 replace:⽤新路由替换当前路由
   // 5.5 reset:擦除导航器状态并将其替换为多个操作的结果
   // 6.6 dismiss:关闭当前栈
 
+  _push = () => {
+    this.props.navigation.push('NavigationOptionsStudyDetail1');
+  };
   // 可行
   _goBack = () => {
     this.props.navigation.goBack('id-1578470526102-4');
@@ -101,10 +154,12 @@ export default class NavigationOptionsStudyScreen extends React.Component {
     const parent = this.props.navigation.dangerouslyGetParent();
     console.log(parent);
   };
-  // 不可行
+  // 可行
   _dismiss = () => {
     this.props.navigation.dismiss();
   };
+
+  // addListener - 订阅导航生命周期的更新
 
   // 可行
   _replace = () => {
@@ -174,6 +229,8 @@ export default class NavigationOptionsStudyScreen extends React.Component {
   // * Pop 导航回到之前的路由
   // * popToPop 导航到堆栈的顶部路由，销毁所有其他路线
 
+  // Reset  用新状态替换当前状态
+  // Reset操作会擦除整个导航状态，并将其替换为多个操作的结果。
   //
   _stackActions_reset = () => {
     const resetAction = StackActions.reset({
@@ -203,6 +260,13 @@ export default class NavigationOptionsStudyScreen extends React.Component {
           <View>
             <Text>react-navigation-stack </Text>
           </View>
+          <View>
+            <Button
+              title="跳到NavigationOptionsStudyDetail1"
+              onPress={this._push}
+            />
+          </View>
+
           <View>
             <Button title="强制本页跳转" onPress={this.navigate} />
           </View>

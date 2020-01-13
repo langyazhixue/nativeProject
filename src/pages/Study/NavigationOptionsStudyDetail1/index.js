@@ -1,5 +1,6 @@
 import React from 'react';
 import {layoutStyles} from '../../../styles/layout';
+import {NavigationEvents} from 'react-navigation';
 import {
   SafeAreaView,
   // StyleSheet,
@@ -14,6 +15,12 @@ export default class NavigationOptionsStudyScreen extends React.Component {
     return (
       <SafeAreaView style={layoutStyles.appContainer}>
         <View>
+          <NavigationEvents
+            onWillFocus={payload => console.log('will focus', payload)}
+            onDidFocus={payload => console.log('did focus', payload)}
+            onWillBlur={payload => console.log('will blur', payload)}
+            onDidBlur={payload => console.log('did blur', payload)}
+          />
           <View>
             <Text>NavigationOptionsStudyDetail1</Text>
           </View>

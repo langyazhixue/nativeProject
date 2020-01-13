@@ -16,7 +16,7 @@ const StudyNavigator = createStackNavigator(
         title: '列表学习',
         //headerBackTitle: '返回',
         // title: // //可以作为headerTitle的备选字段(当设置headerTitle时候会用该字段作为标题),
-        // header: // ⾃自定义导航条，可以通过设置null来隐藏导航条;
+        // header: // 自定义导航条，可以通过设置null来隐藏导航条;
         // headerTitle: 标题
         // headerTitleAllowFontScaling: 标题是否允许缩放，默认true;
         // headerBackTitle: 定义在iOS上当前⻚面进入到下⼀页面的回退标题，可以通过设置null来禁用 它;
@@ -39,13 +39,13 @@ const StudyNavigator = createStackNavigator(
         headerTitle: '导航学习',
       },
     },
-    NavigationOptionsStudyDetail1:{
+    NavigationOptionsStudyDetail1: {
       screen: NavigationOptionsStudyDetail1,
       navigationOptions: {
         headerTitle: 'NavigationOptionsStudyDetail1',
       },
     },
-    NavigationOptionsStudyDetail2:{
+    NavigationOptionsStudyDetail2: {
       screen: NavigationOptionsStudyDetail2,
       navigationOptions: {
         headerTitle: 'NavigationOptionsStudyDetail2',
@@ -79,8 +79,13 @@ const StudyNavigator = createStackNavigator(
       // IOS 上页面切换会有白色渐变蒙层，想去掉可以这样设置，切换时候页面边框也可以在这里设置
       opacity: null,
     },
+    onTransitionStart: () => {
+      console.log('页面跳转动画开始');
+    },
     // onTransitionStart 页面切换开始时候的回调函数(我们可以在这里注册一些通知，告知页面切页面状态，方便后面处理页面切换事件)
-    // onTransitionEnd 页面切换结束时间时候的回调函数
+    onTransitionEnd: () => {
+      console.log('页面跳转动画结束');
+    }, // 页面切换结束时间时候的回调函数
   },
 );
 export default StudyNavigator;

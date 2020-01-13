@@ -42,7 +42,8 @@ export const variableStyle = {
   navRightTitleColor: '#333',
   navThemeColor: '#FEFEFE',
   // tab title 颜色,
-  tabTitleColor: '#333',
+  tabTitleActiveColor: '#00FF00',
+  tabTitleInActiveColor: '#ccc',
   iconGray: '#989898',
   iconBlack: '#262626',
 

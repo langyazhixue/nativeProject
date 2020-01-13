@@ -1,10 +1,12 @@
+import React from 'react';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import HomeNavigator from '../pages/Home';
 import CompanyNavigator from '../pages/Company';
 import MyNavigator from '../pages/My';
 import MessageNavigator from '../pages/Message';
 import StudyNavigator from '../pages/Study';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {variableStyle} from '../styles/variables';
 // createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig)
 // RouteConfigs(必选)：路由配置对象是从路由名称到路由配置的映射，告诉导航器该路由呈现什么
 // BottomTabNavigatorConfig(可选)： 配置导航器的路由(如：默认首屏，navigationOptions， paths等)样式(如，转场模式`mode`, 头部模式等)
@@ -17,9 +19,15 @@ const RootTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         // 可选， 用以配置全局的屏幕导航选项：
         title: '首页', // 可以⽤用作headerTitle和tabBarLabel的备选的通⽤用标题。
+        // tabBarIcon: () => {
+        //   return <Icon name={'home'} size={20} />;
+        // },
         tabBarVisible: true, // 显示或隐藏TabBar, 默认显示
         // tabBarIcon: //  设置TabBar的图标
-        // tabBarOnPress: //Tab呗点击的回调函数，它的参数是包含变量的对象
+        // tabBarLabel // 显示在选项卡栏中的选项卡的标题字符串或给定{focused：boolean,tintColor：string}的函数将返回React.Node，以显示在选项卡栏中
+        // tabBarOnPress: ev => {
+        //   console.log(ev); // navigation
+        // }, //Tab呗点击的回调函数，它的参数是包含变量的对象
         // ---- navigation: navigation prop
         // ---- defaultHandler
         // tabBarOnLongPress // 回调以处理长按事件；参数是一个包含以下内容的对象
@@ -37,7 +45,7 @@ const RootTabNavigator = createBottomTabNavigator(
       screen: CompanyNavigator,
       navigationOptions: {
         title: '公司',
-        tabBarVisible: false, // 切到公司，下面的导航栏就没了
+        //tabBarVisible: false, // 切到公司，下面的导航栏就没了
         // tabBarIcon: ({tintColor, focused}) => {
         // tintColor 当前状态下Tab的颜色
         // focused: Tab 是否被选中
@@ -51,13 +59,13 @@ const RootTabNavigator = createBottomTabNavigator(
       },
     },
 
-    MyNavigatorTab: {
+    MyTab: {
       screen: MyNavigator,
       navigationOptions: {
         title: '我的',
       },
     },
-    StudyNavigatorTab: {
+    StudyTab: {
       screen: StudyNavigator,
       navigationOptions: {
         title: '学习',
@@ -66,25 +74,51 @@ const RootTabNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: 'HomeTab', // 第一次加载时初始选项卡路由的 routeName
-    order: [
-      'HomeTab',
-      'CompanyTab',
-      'MessageTab',
-      'MyNavigatorTab',
-      'StudyNavigatorTab',
-    ], // 定义选项卡顺序的 routeNames 数组
-    defaultNavigationOptions: {
-      // 用于屏幕的默认导航选项
+    order: ['HomeTab', 'CompanyTab', 'MessageTab', 'MyTab', 'StudyTab'], // 定义选项卡顺序的 routeNames 数组
+    defaultNavigationOptions: ({navigation}) => {
+      return {
+        // 用于屏幕的默认导航选项
+        tabBarIcon: ({focused, horizontal, tintColor}) => {
+          // console.group('tabBarIcon');
+          // console.log(tintColor);
+          const {routeName} = navigation.state;
+          let iconName;
+          if (routeName === 'HomeTab') {
+            iconName = 'home';
+          } else if (routeName === 'CompanyTab') {
+            iconName = 'apple';
+          } else if (routeName === 'MessageTab') {
+            iconName = 'weixin';
+          } else if (routeName === 'MyTab') {
+            iconName = 'user';
+          } else if (routeName === 'StudyTab') {
+            iconName = 'inbox';
+          }
+          return <Icon name={iconName} size={20} color={tintColor} />;
+        },
+        tabBarOnPress: ev => {
+          console.log(ev);
+          ev.defaultHandler();
+        },
+      };
     },
     tabBarOptions: {
-      activeTintColor: 'red', // 设置TabBar选中状态下的标签和图标颜色
-      inactiveTintColor: 'green', // 设置TabBar
-      showIcon: false, // 是否展示图标，默认是false
+      activeTintColor: variableStyle.tabTitleActiveColor, // 设置TabBar选中状态下的标签和图标颜色
+      // activeBackgroundColor -活动选项卡的背景色
+      // inactiveBackgroundColor -非活动选项卡的背景色。
+      inactiveTintColor: variableStyle.tabTitleInActiveColor, // 设置TabBar
+      showIcon: true, // 是否展示图标，默认是false
       showLabel: true, // 是否展示标签，默认是true
       upperCaseLabel: true, // 是否使标签大写，默认是 true
-      tabStyle: {}, // 设置单个tab的样式
-      indicatorStyle: {}, // 设置indicator(tab下面的那条线) 的样式
-      labelStyle: {}, // 设置TabBar标签的样式
+      tabStyle: {
+        paddingTop: 10,
+        height: 60,
+      }, // 设置单个tab的样式
+      labelPosition: 'below-icon', // - 与标签图标相关的标签标签显示位置。 可用值为beside-icon和below-icon。 默认为beside-icon
+      labelStyle: {
+        paddingTop: 2,
+        fontSize: 16,
+      }, // 设置TabBar标签的样式
       iconStyle: {}, // 设置图标的样式
       style: {}, // 设置整个TabBar的样式
       allowFontScaling: true, // 设置 TabBar标签是否支持缩放，默认支持；
