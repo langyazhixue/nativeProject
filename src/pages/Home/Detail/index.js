@@ -19,26 +19,25 @@ export default class DetailScreen extends React.Component {
       state: {params},
     } = navigation;
     return {
-      title: params.myTitle,
-      headerBackTitle: params.myTitle,
-      headerRight: (
-        <Button
-          title="third"
-          onPress={() => {
-            navigation.navigate('ThirdDetail', {
-              myTitle: '第三详情页',
-            });
-          }}
-        />
-      ),
+      title: params.headerTitle,
+      headerBackTitle: params.headerTitle,
+      // headerRight: (
+      //   <Button
+      //     title="third"
+      //     onPress={() => {
+      //       navigation.navigate('ThirdDetail', {
+      //         myTitle: '第三详情页',
+      //       });
+      //     }}
+      //   />
+      // ),
     };
   };
   render() {
     return (
       <SafeAreaView style={layoutStyles.appContainer}>
         <View>
-          <Text>首页</Text>
-          <Button title="跳到详情页面" onPress={this.hanlderClick} />
+          <Text>详情页面</Text>
         </View>
       </SafeAreaView>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createStackNavigator} from 'react-navigation-stack';
 import HomeNavigator from '../pages/Home';
 import CompanyNavigator from '../pages/Company';
 import MyNavigator from '../pages/My';
@@ -7,6 +8,8 @@ import MessageNavigator from '../pages/Message';
 import StudyNavigator from '../pages/Study';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {variableStyle} from '../styles/variables';
+
+import WelcomePage from '../pages/Welcome/';
 // createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig)
 // RouteConfigs(必选)：路由配置对象是从路由名称到路由配置的映射，告诉导航器该路由呈现什么
 // BottomTabNavigatorConfig(可选)： 配置导航器的路由(如：默认首屏，navigationOptions， paths等)样式(如，转场模式`mode`, 头部模式等)
@@ -22,7 +25,7 @@ const RootTabNavigator = createBottomTabNavigator(
         // tabBarIcon: () => {
         //   return <Icon name={'home'} size={20} />;
         // },
-        tabBarVisible: true, // 显示或隐藏TabBar, 默认显示
+        // tabBarVisible: true, // 显示或隐藏TabBar, 默认显示
         // tabBarIcon: //  设置TabBar的图标
         // tabBarLabel // 显示在选项卡栏中的选项卡的标题字符串或给定{focused：boolean,tintColor：string}的函数将返回React.Node，以显示在选项卡栏中
         // tabBarOnPress: ev => {
@@ -76,6 +79,13 @@ const RootTabNavigator = createBottomTabNavigator(
     initialRouteName: 'HomeTab', // 第一次加载时初始选项卡路由的 routeName
     order: ['HomeTab', 'CompanyTab', 'MessageTab', 'MyTab', 'StudyTab'], // 定义选项卡顺序的 routeNames 数组
     defaultNavigationOptions: ({navigation}) => {
+      // console.group('navigation');
+      // console.log(navigation);
+      let tabBarVisible = true;
+      // 详情页面，
+      if (navigation.state.index > 0) {
+        tabBarVisible = false;
+      }
       return {
         // 用于屏幕的默认导航选项
         tabBarIcon: ({focused, horizontal, tintColor}) => {
@@ -100,6 +110,7 @@ const RootTabNavigator = createBottomTabNavigator(
           console.log(ev);
           ev.defaultHandler();
         },
+        tabBarVisible,
       };
     },
     tabBarOptions: {
@@ -129,5 +140,11 @@ const RootTabNavigator = createBottomTabNavigator(
     backBehavior: 'initialRoute', // initialRoute返回初始选项卡，order返回上一个选项卡，history返回上次访问标签或none。
   },
 );
+
+export const RootInitNavigator = createStackNavigator({
+  welcome: {
+    screen: WelcomePage,
+  },
+});
 
 export default RootTabNavigator;

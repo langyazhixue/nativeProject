@@ -13,7 +13,7 @@ export default class HomePage extends Component {
   };
   static navigationOptions = {
     title: '首页',
-    headerBackTitle:null,
+    // headerBackTitle: null,
   };
   componentDidMount() {
     console.log('home componentDidMount');

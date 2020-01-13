@@ -10,9 +10,9 @@ const HomeNavigator = createStackNavigator(
       //   headerTitle: 'Home首页',
       // },
     },
-    Detail:{
-      screen:DetailScreen
-    }
+    Detail: {
+      screen: DetailScreen,
+    },
   },
   {
     // 默认的导航栏信息在这里配置
