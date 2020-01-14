@@ -3,8 +3,9 @@ import ListStudy from './ListStudy/index';
 import NavigationOptionsStudy from './NavigationOptionsStudy/index';
 import NavigationOptionsStudyDetail1 from './NavigationOptionsStudyDetail1/index';
 import NavigationOptionsStudyDetail2 from './NavigationOptionsStudyDetail2/index';
-
+import HttpStudy from './HttpStudy/index';
 import InputStudy from './InputStudy/index';
+import AsyncStorage from './AsyncStorage/index';
 import {defaultNavigatiionOptions} from '../../globalSetting';
 const StudyNavigator = createStackNavigator(
   {
@@ -62,6 +63,12 @@ const StudyNavigator = createStackNavigator(
         };
       },
     },
+    HttpStudy: {
+      screen: HttpStudy,
+    },
+    AsyncStorage: {
+      screen: AsyncStorage,
+    },
   },
   {
     // 默认的导航栏信息在这里配置,根据作用不同分为路由配置、视图样式配置两类
@@ -72,7 +79,7 @@ const StudyNavigator = createStackNavigator(
     }, // 初始路路由的可选标识符 路由配置
     // disableKeyboardHandling: true, // 如果为true 则导航到新屏幕时键盘不会自动关闭
     defaultNavigationOptions: {...defaultNavigatiionOptions}, // 屏幕导航的默认选项视图样式
-    mode: 'modal', // 左右是card(相当于iOS中的push效果), 上下是modal(相当于iOS中的modal 效果) // 视图样式
+    mode: 'card', // 左右是card(相当于iOS中的push效果), 上下是modal(相当于iOS中的modal 效果) // 视图样式
     headerMode: 'screen', //  导航栏的显示模式: screen: 有渐变透明效果, float: 无透明效果, none: 隐藏导航 栏。
     // headerBackTitleVisible: false, // 提供合理的默认值以确定后退按钮标题是否可见，但如果要覆盖它，则可以使用true或` false 在此选项中。
     cardStyle: {

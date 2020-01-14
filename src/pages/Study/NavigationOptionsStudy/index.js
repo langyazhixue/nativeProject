@@ -1,5 +1,6 @@
 import React from 'react';
 import {layoutStyles} from '../../../styles/layout';
+
 import {
   SafeAreaView,
   // StyleSheet,
@@ -9,7 +10,8 @@ import {
   // StatusBar,
   Button,
 } from 'react-native';
-
+import MyBackButton from './components/button';
+import FocusStateLabel from './components/buttonFocus';
 import {NavigationActions, StackActions} from 'react-navigation';
 
 export default class NavigationOptionsStudyScreen extends React.Component {
@@ -317,6 +319,12 @@ export default class NavigationOptionsStudyScreen extends React.Component {
               title="StackActions_reset"
               onPress={this._stackActions_reset}
             />
+          </View>
+
+          <View>
+            <Text>---------------withNavigation -------------------</Text>
+            <MyBackButton />
+            <FocusStateLabel />
           </View>
         </View>
       </SafeAreaView>

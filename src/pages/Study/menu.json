@@ -11,6 +11,23 @@
     "name": "Input 学习 ",
     "stackScreen": "InputStudy",
     "params":{
-      "title": "InputStudy",
+      "title": "InputStudy"
     }
-}]
+},
+{
+  "label": "网络加载",
+   "name": "网络加载",
+   "stackScreen": "HttpStudy",
+   "params":{
+     "headerTitle": "网络加载"
+   }
+},
+  {
+    "label": "数据缓存",
+     "name": "数据缓存",
+     "stackScreen": "AsyncStorage",
+     "params":{
+       "headerTitle": "AsyncStorage"
+     }
+  }
+]

@@ -8,7 +8,7 @@ export default class HomePage extends Component {
     // 自带navigation
     const {navigation} = this.props;
     navigation.navigate('Detail', {
-      myTitle: 'Home详情页面',
+      headerTitle: 'Home详情页面',
     });
   };
   static navigationOptions = {
