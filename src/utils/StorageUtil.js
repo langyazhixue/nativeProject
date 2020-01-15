@@ -1,5 +1,5 @@
-import {AsyncStorage} from 'react-native';
-
+// import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 export default class StorageUtil {
   static setData(keyName, keyData) {
     let promise = new Promise((reslove, reject) => {
