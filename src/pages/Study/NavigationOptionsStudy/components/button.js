@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, SafeAreaView, Button} from 'react-native';
 import {withNavigation} from 'react-navigation';
+
 //withNavigation
 
 //withNavigation是一个高阶组件，它可以将 navigation 这个 prop 传递到一个包装的组件。
