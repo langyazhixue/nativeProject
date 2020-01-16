@@ -1,10 +1,10 @@
 import StorageUtil from './StorageUtil';
-export default class DataStore {
+export default class offLineStorageUtil {
   static setData(url, data, callback) {
     if (!data || !url) {
       return;
     }
-    return StorageUtil.setData(url, JSON.stringify(DataStore.wrapData(data)));
+    return StorageUtil.setData(url, JSON.stringify(this.wrapData(data)));
   }
   static wrapData(data) {
     return {
@@ -18,9 +18,9 @@ export default class DataStore {
   static deleteData(url) {
     return StorageUtil.deleteData(url);
   }
-  static checkTimestampValid(targetTimestamp) {
+  static checkTimeStampValid(targetTimestamp) {
     const currentTimestamp = new Date().getTime();
-    if (currentTimestamp - targetTimestamp > 4 * 60 * 60) {
+    if (currentTimestamp - targetTimestamp > 4 * 60 * 60 * 1000) {
       return false;
     } else {
       return true;

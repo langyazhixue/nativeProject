@@ -5,9 +5,15 @@ export default class StorageUtil {
     let promise = new Promise((reslove, reject) => {
       AsyncStorage.setItem(keyName, keyData, error => {
         if (error) {
-          return reslove('存储失败');
+          return reslove({
+            code: 0,
+            message: '存储失败',
+          });
         } else {
-          return reslove('存储成功');
+          return reslove({
+            code: 1,
+            message: '存储成功',
+          });
         }
       });
     });
@@ -17,10 +23,16 @@ export default class StorageUtil {
   static deleteData(keyName) {
     let promise = new Promise((reslove, reject) => {
       AsyncStorage.removeItem(keyName, error => {
-        if (!error) {
-          return reslove('数据已经删除');
+        if (error) {
+          return reslove({
+            code: 0,
+            message: '删除失败',
+          });
         } else {
-          return reslove('数据删除失败');
+          return reslove({
+            code: 1,
+            message: '删除成功',
+          });
         }
       });
     });
@@ -30,10 +42,17 @@ export default class StorageUtil {
   static getData(keyName) {
     let promise = new Promise((resolve, reject) => {
       AsyncStorage.getItem(keyName, (error, result) => {
-        if (!error) {
-          return resolve(result);
+        if (error) {
+          return resolve({
+            code: 0,
+            message: '获取失败',
+          });
         } else {
-          return resolve('获取数据失败');
+          return resolve({
+            code: 1,
+            message: '获取成功',
+            data: result,
+          });
         }
       });
     });

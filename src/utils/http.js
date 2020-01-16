@@ -4,7 +4,7 @@
 import axios from 'axios';
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 15 * 1000;
-axiosInstance.defaults.baseURL = 'http://m.app.haosou.com/';
+axiosInstance.defaults.baseURL = 'http://m.app.haosou.com';
 axiosInstance.interceptors.request.use(
   config => {
     return config;

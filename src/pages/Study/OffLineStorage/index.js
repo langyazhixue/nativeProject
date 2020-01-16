@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 
-import offLineStorageUtil from '../../../utils/offLineStorageUtil';
+import offLineRequest from '../../../utils/offLineRequest';
 export default class NavigationOptionsStudyScreen extends React.Component {
   // 静态属性配置 导航页面的属性
   static navigationOptions = props => {
@@ -22,48 +22,44 @@ export default class NavigationOptionsStudyScreen extends React.Component {
       headerTitle: params.headerTitle,
     };
   };
-  // getData(url) {
-  //   return new Promise((resolve, reject) => {
-  //   //   this.fetchLocalData(url)
-  //   //     .then(wrapdata => {
-  //   //       if (
-  //   //         wrapdata &&
-  //   //         offLineStorageUtil.checkTimestampValid.checkTimestampValid(
-  //   //           wrapdata.timestamp,
-  //   //         )
-  //   //       ) {
-  //   //         resolve(wrapdata);
-  //   //       } else {
-  //   //         this.fetchNetData(url)
-  //   //           .then(data => {
-  //   //             //给数据打个时间戳
-  //   //             resolve(this._wrapData(data));
-  //   //           })
-  //   //           .catch(e => {
-  //   //             reject(e);
-  //   //           });
-  //   //       }
-  //   //     })
-  //   //     .catch(error => {
-  //   //       console.log(error);
-  //   //     });
-  //   // });
-  // }
-  fetchLocalData(url) {}
-  fetchNetData(url) {}
+  // 测试离线缓存接口
+
+  // .get('index/getData', {
+  //   params: {
+  //     type: 1,
+  //     page: 1,
+  //   },
+  // })
+
+  _test() {
+    const url = 'index/getData';
+    const method = 'get';
+    const options = {
+      type: 1,
+      page: 1,
+    };
+    offLineRequest
+      .getData(url, method, options, true)
+      .then(res => {
+        console.log(res);;
+      })
+      .catch(error => {
+        console.log(error);;
+      });;
+  }
   render() {
     return (
       <SafeAreaView style={layoutStyles.appContainer}>
         <View style={styles.container}>
           <View>
             <Text>离线缓存数据Demo</Text>
+            <Button title="测试离线缓存" onPress={this._test} />
           </View>
         </View>
       </SafeAreaView>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

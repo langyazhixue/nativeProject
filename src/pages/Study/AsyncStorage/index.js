@@ -25,18 +25,22 @@ export default class NavigationOptionsStudyScreen extends React.Component {
 
   _setData = () => {
     StorageUtil.setData('key1', 'test').then(result => {
-      Alert.alert(result);
+      Alert.alert(result.message);
     });
   };
   _getData = () => {
     StorageUtil.getData('key1').then(result => {
-      Alert.alert(result);
+      if (result.code === 1) {
+        Alert.alert(result.message);
+      } else {
+        Alert.alert(result.message);
+      }
     });
   };
 
   _deleteData = () => {
     StorageUtil.deleteData('key1').then(result => {
-      Alert.alert(result);
+      Alert.alert(result.message);
     });
   };
   render() {

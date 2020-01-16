@@ -6,6 +6,8 @@ import NavigationOptionsStudyDetail2 from './NavigationOptionsStudyDetail2/index
 import HttpStudy from './HttpStudy/index';
 import InputStudy from './InputStudy/index';
 import AsyncStorage from './AsyncStorage/index';
+import OffLineStorage from './OffLineStorage/index';
+import FlatListStudy from './FlatListStudy/index';
 import {defaultNavigatiionOptions} from '../../globalSetting';
 const StudyNavigator = createStackNavigator(
   {
@@ -68,6 +70,12 @@ const StudyNavigator = createStackNavigator(
     },
     AsyncStorage: {
       screen: AsyncStorage,
+    },
+    OffLineStorage: {
+      screen: OffLineStorage,
+    },
+    FlatListStudy: {
+      screen: FlatListStudy,
     },
   },
   {

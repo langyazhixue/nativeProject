@@ -29,5 +29,20 @@
      "params":{
        "headerTitle": "AsyncStorage"
      }
+  },
+  {
+    "label": "离线缓存",
+     "name": "离线缓存",
+     "stackScreen": "OffLineStorage",
+     "params":{
+       "headerTitle": "离线缓存"
+     }
+  },{
+    "label": "列表下拉刷新，下拉加载分页",
+    "name": "列表下拉刷新，下拉加载分页",
+    "stackScreen": "FlatListStudy",
+    "params":{
+      "headerTitle": "列表下拉刷新，下拉加载分页"
+    }
   }
 ]
